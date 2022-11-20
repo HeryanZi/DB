@@ -6,6 +6,15 @@
 
 <body>
     <center>
+        <?php
+include "koneksi.php";
+$auto = mysqli_query($koneksi, "SELECT max(NomorP) AS max_code FROM pasien");
+$data = mysqli_fetch_array($auto);
+$urutan = $data['max_code'];
+$urutan++;
+$kd_kat = sprintf("%05s", $urutan);
+
+?>
         <form action="proses_simpan.php" method="POST">
             <table border="0">
                 <tr>
@@ -15,7 +24,7 @@
                 </tr>
                 <tr>
                     <td width="150">Nomor Pasien</td>
-                    <td width="250"><input type="text" name="NomorP" value=""></td>
+                    <td width="250"><input type="text" name="NomorP" value="<?php echo $kd_kat?>"></td>
                 </tr>
                 <tr>
                     <td width="150">Nama Pasien</td>
